@@ -1,4 +1,4 @@
-proc swap(x: var int, y: var int): void =
+proc swap*(x: var any, y: var any): void =
     let temp = x
     x = y
     y = temp
