@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: install nim
+      run: apt install nim
+    - name: Run a multi-line script
+      run: |
+        nimble test
