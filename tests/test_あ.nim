@@ -4,9 +4,11 @@ import unittest
 import random
 import math
 import sequtils
+import strutils
 import sugar
 
 import あ/swap
+import あ/luhn
 
 suite "あ test":
     test "swap":
@@ -37,3 +39,25 @@ suite "あ test":
             assert a_seq == ($B).map(x => x)
             assert b_seq == ($A).map(x => x)
 
+    test "luhn":
+        let
+            # MOCK
+            correct = [
+                5555555555554444, 5105105105105100,  # Master
+                4111111111111111, 4012888888881881,  # Visa
+                3530111333300000, 3566002020360505,  # JCB
+                30569309025904, 38520000023237,  # Diners
+                378282246310005, 371449635398431, 378734493671000,  # Amex
+                6011111111111117, 6011000990139424  # Discover
+            ]
+
+            wrong = [6011000990139425]
+        
+            correct_checked = correct.map(num => luhn( ($num).map(x => ($x).parseInt) ))
+            wrong_checked = wrong.map(num => luhn( ($num).map(x => ($x).parseInt) ))
+        
+        for res in correct_checked:
+            assert res
+        
+        for res in wrong_checked:
+            assert (not res)
