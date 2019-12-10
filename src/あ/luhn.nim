@@ -2,8 +2,6 @@ import sequtils
 import strutils
 import sugar
 
-import unittest
-
 proc reverce[T](list: openArray[T]): seq[T] =
     var tmp: seq[T]
     for i in 0..(list.len-1):
