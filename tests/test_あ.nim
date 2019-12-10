@@ -7,8 +7,11 @@ import sequtils
 import strutils
 import sugar
 
+import lib
+
 import あ/swap
 import あ/luhn
+import あ/crypt
 
 suite "あ test":
     test "swap":
@@ -61,3 +64,13 @@ suite "あ test":
         
         for res in wrong_checked:
             assert (not res)
+
+    test "crypt":
+        for i in 0..99:
+            let
+                input = lib.randBytes()
+                key: int = rand(999999)
+            
+            assert crypt(input, key) != input
+            assert crypt(input, key).crypt(key) == input
+                
